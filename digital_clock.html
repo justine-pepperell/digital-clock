@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div>
+  <header id="siteTitle">Aotearoa</header>
+  </div>
+  
+  <p id="timerField"></p>
+  
+  <script>
+    let timerPlace = document.querySelector("#timerField");
+    let morningOrEvening = "";
+
+    function timer() {
+      let date = new Date();
+
+      let seconds = date.getSeconds();
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+
+     // Is it AM or PM?
+      if (hours >= 12) {
+        morningOrEvening = "PM";
+      } else {
+        morningOrEvening = "AM";
+      }
+
+      // Normalize to the 12 hour clock
+      if (hours > 12) {
+          hours -= 12;
+        }
+      
+        // Ensure second and minutes values are two digits
+      let paddedSeconds = String(seconds).padStart(2, "0");
+      let paddedMinutes = String(minutes).padStart(2, "0");
+
+      timerField.textContent = `${hours}:${paddedMinutes}:${paddedSeconds} ${morningOrEvening}`;
+
+      requestAnimationFrame(timer);
+    }
+    timer();
+
+</script>
+
+</body>
+</html>
